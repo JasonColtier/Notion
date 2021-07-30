@@ -10,26 +10,27 @@ Future remainder !
 
 <div id="dateSetter" style="visibility: collapse">
     <input type="date" id="dateInput">
-    <button type="button" id="buttonSetDate" onclick="">
-        SetDate !
-    </button>
+    <button type="button" id="buttonSetDate">SetDate !</button>
+</div>
+<div>
+    <button type="button" id="buttonClear">clear</button>
 </div>
 
 target date is : <label id="displayedValue">no date set</label>
 <div id="remainder">
     to set
-</div>
+</div> <label>days to go !</label>
 <script>
-    const target = new Date('2021-08-15');
 
-    var diff = target.getTime() - Date.now();
-
-    var days = diff/1000/60/60/24;
-    document.getElementById("remainder").innerHTML = Math.trunc(days).toString();
     document.getElementById("buttonSetDate").onclick = function f(){
-
         setCookie("expectedDate",document.getElementById("dateInput").value,150);
         alert("value set !");
+        document.location.reload();
+    }
+
+    document.getElementById("buttonClear").onclick = function f(){
+        deleteCookie("expectedDate");
+        alert("clear");
         document.location.reload();
     }
 
@@ -41,6 +42,9 @@ target date is : <label id="displayedValue">no date set</label>
         console.log(cookie);
         document.getElementById("displayedValue").innerHTML = cookie.valueOf();
 
+        var diff = new Date(cookie.valueOf()).getTime() - Date.now();
+        var days = diff/1000/60/60/24;
+        document.getElementById("remainder").innerHTML = Math.trunc(days).toString();
     }else{
         document.getElementById("dateSetter").setAttribute("style","visibility: visible");
     }
@@ -53,6 +57,10 @@ target date is : <label id="displayedValue">no date set</label>
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
         let expires = "expires="+ d.toUTCString();
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function deleteCookie(cname){
+        document.cookie = cname+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     }
 
     function getCookie(cname) {
