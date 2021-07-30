@@ -7,7 +7,15 @@
 </head>
 <body>
 Future remainder !
-target date is : 31-07-2021
+
+<div id="dateSetter" style="visibility: collapse">
+    <input type="date" id="dateInput">
+    <button type="button" id="buttonSetDate" onclick="">
+        SetDate !
+    </button>
+</div>
+
+target date is : <label id="displayedValue">no date set</label>
 <div id="remainder">
     to set
 </div>
@@ -18,6 +26,50 @@ target date is : 31-07-2021
 
     var days = diff/1000/60/60/24;
     document.getElementById("remainder").innerHTML = Math.trunc(days).toString();
+    document.getElementById("buttonSetDate").onclick = function f(){
+
+        setCookie("expectedDate",document.getElementById("dateInput").value,150);
+        alert("value set !");
+        document.location.reload();
+    }
+
+    var dateCookies = document.cookie;
+
+    var cookie = getCookie("expectedDate");
+
+    if(cookie !== ""){
+        console.log(cookie);
+        document.getElementById("displayedValue").innerHTML = cookie.valueOf();
+
+    }else{
+        document.getElementById("dateSetter").setAttribute("style","visibility: visible");
+    }
+
+    console.log(dateCookies);
+
+
+    function setCookie(cname, cvalue, exdays) {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
 </script>
 </body>
 </html>
