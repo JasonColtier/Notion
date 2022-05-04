@@ -14,10 +14,16 @@
             return response.json();
         }).then(function (data) {
             console.log(data);
+            console.log(data.content);
+            document.getElementById("quoteInsert").innerHTML=data.content;
         }).catch(function () {
-            console.log("Booo");
+            console.log("Get content from api failed");
         });
     </script>
+
+    <div id="quoteInsert">
+
+    </div>
 </body>
 
 </html>
