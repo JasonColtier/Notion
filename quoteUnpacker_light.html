@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="background-color: transparent">
+
+
+    <script>
+        fetch("https://api.quotable.io/random").then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            console.log(data);
+            console.log(data.content);
+            document.getElementById("quoteInsert").innerHTML=data.content;
+        }).catch(function () {
+            console.log("Get content from api failed");
+        });
+    </script>
+
+    <div id="quoteInsert" style="
+    font-family:ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+    width: fit-content;
+    text-align: center;
+    color: #37352f;
+    font-size: 1.3em;
+    ">
+
+    </div>
+</body>
+
+</html>
