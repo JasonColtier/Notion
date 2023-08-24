@@ -1,1 +1,3 @@
-console.log("test success !");
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("test success !");
+}); 
