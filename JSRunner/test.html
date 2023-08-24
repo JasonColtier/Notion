@@ -1,8 +1,15 @@
 <html>
+
 <body>
     <script>
         var x = 3;
         console.log("hi console");
-      </script>
+        var exec = require('child_process').exec;
+        exec('pwd', function callback(error, stdout, stderr) {
+            // result
+        });
+    </script>
+    version 1
 </body>
+
 </html>
